@@ -1,0 +1,12 @@
+server:
+  shutdown: graceful
+  port: 8080
+
+
+spring:
+  main:
+    banner-mode: 'off'
+  application:
+    name: eda-sample-order
+  profiles:
+    active: default

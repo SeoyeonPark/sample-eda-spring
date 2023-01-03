@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+    import:
+      - "optional:aws-parameterstore:/config/${spring.application.name}/"
+      - "aws-secretsmanager:/secret/${spring.application.name}/db"
+  datasource:
+    url: jdbc:mysql://${host}:3306/databasename
+    username: ${username}
+    password: ${password}
