@@ -1,11 +1,12 @@
 appName := "eda-sample-coffee-app"
-ecr := "546281408042.dkr.ecr.ap-northeast-2.amazonaws.com/${appName}"
+ecr := ".dkr.ecr.ap-northeast-2.amazonaws.com/${appName}"
 
-
-.PHONY: init
-init:
-	@echo "Initialize Sample EDA Application for workshop"
-	@echo "mysql & redis docker up"
+.PHONY: check
+check:
+ifndef ACCOUNT_ID
+	$(eval export AWS_WS_ACCOUNT_ID := $(shell aws sts get-caller-identity --query "Account" --output text))
+	@if [[ -z "$(ACCOUNT_ID)" ]]; then echo "AWS_WS_ACCOUNT_ID unset and cannot use make scripts!"; exit 1; fi
+endif
 
 .PHONY: build
 build:
@@ -19,11 +20,15 @@ docker-build:
 
 .PHONY: docker-push
 docker-push:
+ifndef ACCOUNT_ID
+	$(eval export ACCOUNT_ID := $(shell aws sts get-caller-identity --query "Account" --output text))
+	@if [[ -z "$(ACCOUNT_ID)" ]]; then echo "Cannot find AWS Account ID, so cannot push docker image to Amazon ECR"; exit 1; fi
+endif
 	@echo "Build dockerfile and push to Amazon ECR"
 	@make docker-build
 	@echo "Docker image push to ECR..."
 	@docker tag ${appName}:latest ${ecr}:latest
-	@docker push ${ecr}:latest
+	@docker push ${ACCOUNT_ID}${ecr}:latest
 
 .PHONY: docker-run
 docker-run:
