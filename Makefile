@@ -1,15 +1,16 @@
 appName := "eda-sample-coffee-app"
-ecr := ".dkr.ecr.ap-northeast-2.amazonaws.com/${appName}"
 
 .PHONY: check
 check:
 ifndef ACCOUNT_ID
-	$(eval export AWS_WS_ACCOUNT_ID := $(shell aws sts get-caller-identity --query "Account" --output text))
+	$(eval export ACCOUNT_ID := $(shell aws sts get-caller-identity --query "Account" --output text))
 	@if [[ -z "$(ACCOUNT_ID)" ]]; then echo "AWS_WS_ACCOUNT_ID unset and cannot use make scripts!"; exit 1; fi
 endif
+	@echo "Current AWS account id: "${ACCOUNT_ID}
 
 .PHONY: build
 build:
+	@echo "Gradle build"
 	@./gradlew clean build
 
 .PHONY: docker-build
@@ -24,11 +25,12 @@ ifndef ACCOUNT_ID
 	$(eval export ACCOUNT_ID := $(shell aws sts get-caller-identity --query "Account" --output text))
 	@if [[ -z "$(ACCOUNT_ID)" ]]; then echo "Cannot find AWS Account ID, so cannot push docker image to Amazon ECR"; exit 1; fi
 endif
-	@echo "Build dockerfile and push to Amazon ECR"
+	@$(eval export ECR_REPOSITORY = ${ACCOUNT_ID}.dkr.ecr.ap-northeast-2.amazonaws.com/${appName})
+	@echo "Build dockerfile and push to Amazon ECR. Account ID: "${ACCOUNT_ID}
 	@make docker-build
 	@echo "Docker image push to ECR..."
-	@docker tag ${appName}:latest ${ecr}:latest
-	@docker push ${ACCOUNT_ID}${ecr}:latest
+	@docker tag ${appName}:latest ${ECR_REPOSITORY}:latest
+	@docker push ${ECR_REPOSITORY}:latest
 
 .PHONY: docker-run
 docker-run:

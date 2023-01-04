@@ -27,15 +27,21 @@ aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS
 make docker-push
 ```
 
-### Force deploy to ECS Service
+After you push docker image to Amazon ECR, please go back to cdk deployment.
 
-Update ECS service using _latest_ tagged docker image in Amazon ECR
+---
+#### Force deploy to ECS Service
+
+Please use the command below after you modify this application.
+
+1. After modifying the application, build & push docker images to ECR.
+2. Update ECS service using _latest_ tagged docker image in Amazon ECR
 
 >__WARNING!__
 > 
 >The aws cli command below updates ecs service directly without CI/CD pipeline.
 >
->Please do not use this command in __production environment__. This command is for workshop only.
+>Please do not use this command in __production environment__. This command only used in workshop.
 
 ```shell
 aws ecs update-service \
