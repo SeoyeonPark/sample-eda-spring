@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  workshop-local-database:
+    image: public.ecr.aws/docker/library/mysql:8.0
+    platform: linux/x86_64
+    hostname: workshop-eda-mysql
+    container_name: workshop-eda-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: workshop
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./local_schema_initialization.sql:/docker-entrypoint-initdb.d/local_schema_initialisation.sql

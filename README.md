@@ -22,7 +22,7 @@ make docker-run
 Before you use this command, please make sure your ECR repository is deployed.
 
 ```shell
-aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${ACCOUNT_ID}>.dkr.ecr.ap-northeast-2.amazonaws.com
+make docker-login
 
 make docker-push
 ```
@@ -45,6 +45,6 @@ Please use the command below after you modify this application.
 
 ```shell
 aws ecs update-service \
- --cluster eda-cluster \
- --service eda-coffee-app-svc
+ --cluster ecs-cluster-coffee \
+ --service ecs-svc-eda-coffee-app
 ```

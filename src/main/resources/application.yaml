@@ -1,12 +1,22 @@
 server:
   shutdown: graceful
   port: 8080
+  error:
+    whitelabel:
+      enabled: off
+    include-stacktrace: always
 
 
 spring:
   main:
     banner-mode: 'off'
   application:
-    name: eda-sample-order
+    name: eda-sample-coffee-app
   profiles:
-    active: default
+    default: local
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: validate
+    show-sql: true

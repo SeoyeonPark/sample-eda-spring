@@ -1,4 +1,4 @@
-package com.sample.sampleedaspring.order.domain.models.Product;
+package com.sample.sampleedaspring.order.domain.models.product;
 
 import lombok.AccessLevel;
 import lombok.Setter;

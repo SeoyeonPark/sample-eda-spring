@@ -3,9 +3,11 @@ spring:
     activate:
       on-profile: dev
     import:
-      - "optional:aws-parameterstore:/config/${spring.application.name}/"
-      - "aws-secretsmanager:/secret/${spring.application.name}/db"
+      - "aws-secretsmanager:/secret/db/eda-ws-coffee"
   datasource:
-    url: jdbc:mysql://${host}:3306/databasename
+    url: jdbc:mysql://${host}:${port}/edaworkshop?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
     username: ${username}
     password: ${password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 100
