@@ -1,14 +1,12 @@
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: local-docker
   datasource:
-    url: jdbc:mysql://localhost:13306/workshop_eda?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://workshop-eda-mysql:3306/workshop_eda?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: workshop_eda
     password: workshop
     driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      maximum-pool-size: 20
   jpa:
     hibernate:
       naming:

@@ -57,7 +57,7 @@ endif
 .PHONY: docker-run
 docker-run:
 	@echo "docker run in local"
-	@docker run -d -p 8089:8080 -e SPRING_PROFILES_ACTIVE=local --rm --name $(appName) $(appName):latest
+	@docker run -d -p 8089:8080 -e SPRING_PROFILES_ACTIVE=local-docker  --network workshop_default --rm --name $(appName) $(appName):latest
 	@echo "Tailing logs..."
 	@docker logs -f $(appName)
 

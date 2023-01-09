@@ -1,10 +1,10 @@
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: test
   datasource:
-    url: jdbc:mysql://localhost:13306/workshop_eda?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: workshop_eda
+    url: jdbc:mysql://localhost:13306/workshop_eda_test?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: workshop_eda_test
     password: workshop
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:

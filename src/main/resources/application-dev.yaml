@@ -5,9 +5,16 @@ spring:
     import:
       - "aws-secretsmanager:/secret/db/eda-ws-coffee"
   datasource:
-    url: jdbc:mysql://${host}:${port}/edaworkshop?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${host}:${port}/workshop_eda?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: ${username}
     password: ${password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 100
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    generate-ddl: true
+
