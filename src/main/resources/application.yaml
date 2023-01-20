@@ -19,9 +19,6 @@ logging:
   level:
     io.awspring.cloud.secretsmanager: debug
 
-#springdoc:
-#  api-docs:
-#    path: /api-docs
-#  swagger-ui:
-#    path: /api-doc.html
-#    operations-sorter: method
+springdoc:
+  paths-to-match:
+    - /**

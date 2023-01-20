@@ -1,58 +1,70 @@
-package com.sample.sampleedaspring.order.domain.models.order;
+package com.sample.sampleedaspring.order.domain.models;
 
-import com.sample.sampleedaspring.order.domain.models.product.Product;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NonNull;
 
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-@Getter
-@Setter(AccessLevel.NONE)
 public class Order {
-    private OrderId id;
+    @Getter
+    private final OrderId id;
+    @Getter
+    @NonNull
+    private final String customerId;
+    @Getter
+    @NonNull
     private OrderStatus status;
-    private List<OrderItem> orderItems;
-    private BigDecimal price;
+    @Getter
+    @NonNull
+    @Size(min = 1, max = 20)
+    private List<DirectOrderItem> directOrderItems;
+    @Getter
+    @NonNull
+    private BigDecimal totalPrice;
 
-    public Order(OrderId id, Product product) {
+    public Order(
+            @NonNull OrderId id,
+            @NonNull String customerId,
+            @NonNull @Size(min = 1, max = 20) List<DirectOrderItem> directOrderItems) {
         this.id = id;
-        this.orderItems = new ArrayList<>(Arrays.asList(new OrderItem(product)));
+        this.customerId = customerId;
+        this.directOrderItems = new ArrayList<>(directOrderItems);
         this.status = OrderStatus.CREATED;
-        this.price = new BigDecimal(0);
+        this.totalPrice = directOrderItems.stream()
+                .map(o -> o.getPrice())
+                .reduce(new BigDecimal(0), (a, b) -> a.add(b));
     }
 
-    public void validateOrderState() {
+    private void validateOrderState() {
         if (OrderStatus.COMPLETED.equals(status)) {
             throw new DomainException("이미 완료된 주문 건입니다");
         }
     }
 
-    public void validateProduct(Product product) {
-        if (product == null) {
-            throw new DomainException("The product cannot be null");
-        }
+    public void completeOrder() {
+        validateOrderState();
+
+        status = OrderStatus.COMPLETED;
     }
 
-    public void addOrder(final Product product) {
+    public void addOrder(final DirectOrderItem directOrderItem) {
         validateOrderState();
-        validateProduct(product);
 
-        orderItems.add(new OrderItem(product));
-        price = price.add(product.getPrice());
+        directOrderItems.add(directOrderItem);
+        totalPrice.add(directOrderItem.getPrice());
     }
 
     public void removeOrder(final OrderId id) {
         validateOrderState();
-        final OrderItem orderItem = orderItems.stream()
-                .filter(existItem -> existItem.getProductId().equals(id))
+        final DirectOrderItem directOrderItem = directOrderItems.stream()
+                .filter(existItem -> existItem.getMenuId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new DomainException("Product id " + id + " does not exist."));
-        orderItems.remove(orderItem);
-        price = price.subtract(orderItem.getPrice());
+                .orElseThrow(() -> new DomainException("Menu id " + id + " does not exist."));
+        directOrderItems.remove(directOrderItem);
+        totalPrice.subtract(directOrderItem.getPrice());
     }
 
 }

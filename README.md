@@ -43,8 +43,14 @@ Please use the command below after you modify this application.
 >
 >Please do not use this command in __production environment__. This command only used in workshop.
 
+TODO: ecs task create and update ecs cluster service
 ```shell
 aws ecs update-service \
  --cluster ecs-cluster-coffee \
  --service ecs-svc-eda-coffee-app
 ```
+
+
+#### Swagger UI
+
+> http://{server_url}:{server_port}/swagger-ui/index.html

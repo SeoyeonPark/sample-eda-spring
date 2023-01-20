@@ -1,18 +1,17 @@
-package com.sample.sampleedaspring.order.domain.models.order;
+package com.sample.sampleedaspring.order.domain.models;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.Value;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Getter
-@Setter(AccessLevel.NONE)
+@Value
 public class OrderId {
-    private String id;
+    @Getter
+    private String value;
 
-    public OrderId() {
-        this.id = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss.S"));
+    public OrderId(String loginId) {
+        this.value = loginId + "_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss.S"));
     }
 }

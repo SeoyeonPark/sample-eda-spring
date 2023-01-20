@@ -29,4 +29,5 @@ public class Customer {
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
 }

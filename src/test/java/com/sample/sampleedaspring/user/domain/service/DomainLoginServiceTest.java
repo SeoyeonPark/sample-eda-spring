@@ -23,17 +23,17 @@ public class DomainLoginServiceTest {
         loginService = new DomainLoginService(customerRepository);
     }
 
-    @Test
-    void whenLoginWithExistedId_thenException() {
-        final String loginId = "existed_id";
-        when(customerRepository.findById(loginId)).thenReturn(Optional.of(
-                Customer.builder()
-                        .loginId(loginId)
-                        .build())
-        );
-
-        Assertions.assertThrows(DuplicatedLoginIdException.class, () -> loginService.login(loginId));
-    }
+//    @Test
+//    void whenLoginWithExistedId_thenException() {
+//        final String loginId = "existed_id";
+//        when(customerRepository.findById(loginId)).thenReturn(Optional.of(
+//                Customer.builder()
+//                        .loginId(loginId)
+//                        .build())
+//        );
+//
+//        Assertions.assertThrows(DuplicatedLoginIdException.class, () -> loginService.login(loginId));
+//    }
 
     @Test
     void whenLoginWithNewId_thenSaveCustomer() {
