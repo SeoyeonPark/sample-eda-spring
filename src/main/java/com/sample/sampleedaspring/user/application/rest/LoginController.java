@@ -19,7 +19,7 @@ public class LoginController {
     @PostMapping(value = "/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
         log.info("Login user: {}", request.getId());
-        String loginId = loginService.login(request.getId());
+        String loginId = loginService.login(request.getId(), request.getPw());
         LoginResponse response = LoginResponse.builder()
                 .id(loginId)
                 .build();

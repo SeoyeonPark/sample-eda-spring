@@ -38,7 +38,8 @@ public class DomainLoginServiceTest {
     @Test
     void whenLoginWithNewId_thenSaveCustomer() {
         final String loginId = "new_test_id";
-        String responseLoginId = loginService.login(loginId);
+        final String loginPw = "new_test_pw";
+        String responseLoginId = loginService.login(loginId, loginPw);
 
         verify(customerRepository).save(any(Customer.class));
         Assertions.assertNotNull(responseLoginId);

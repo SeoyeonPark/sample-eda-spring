@@ -17,7 +17,7 @@ public class CreateDirectOrderController {
     private final CreateDirectOrderUseCase createDirectOrderUseCase;
 
     @PostMapping
-    void orderMenu(@RequestBody CreateDirectOrderRequest request) {
+    boolean orderMenu(@RequestBody CreateDirectOrderRequest request) {
         log.info(request.toString());
         CreateDirectOrderCommand command = new CreateDirectOrderCommand(
                 request.getLoginId(),
@@ -26,6 +26,6 @@ public class CreateDirectOrderController {
                 request.getOrderCount(),
                 request.getPrice()
         );
-        createDirectOrderUseCase.createOrder(command);
+        return createDirectOrderUseCase.createOrder(command);
     }
 }

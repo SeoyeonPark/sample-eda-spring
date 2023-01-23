@@ -20,22 +20,30 @@ public class GetMenuListServiceSample implements GetMenuListQuery {
     @Override
     public List<MenuResponseDto> getAllMenuList() {
         List<Menu> temp = List.of(
-                new Menu("아메리카노",
+                new Menu(
+                        new Menu.MenuId(1L),
+                        "아메리카노",
                     MenuType.COFFEE,
                     new SupportedOption(
                             Set.of(HotIced.HOT, HotIced.ICED)
                     ), 5000),
-                new Menu("카페라떼",
+                new Menu(
+                        new Menu.MenuId(2L),
+                        "카페라떼",
                         MenuType.COFFEE,
                         new SupportedOption(
                                 Set.of(HotIced.HOT, HotIced.ICED)
                         ), 5300),
-                new Menu("캬라멜마끼야또",
+                new Menu(
+                        new Menu.MenuId(3L),
+                        "캬라멜마끼야또",
                         MenuType.COFFEE,
                         new SupportedOption(
                                 Set.of(HotIced.HOT, HotIced.ICED)
                         ), 5500),
-                new Menu("오트밀 라떼",
+                new Menu(
+                        new Menu.MenuId(4L),
+                        "오트밀 라떼",
                         MenuType.COFFEE,
                         new SupportedOption(
                                 Set.of(HotIced.HOT, HotIced.ICED)

@@ -6,4 +6,5 @@ import lombok.*;
 @Setter(AccessLevel.NONE)
 public class LoginRequest {
     private String id;
+    private String pw;
 }

@@ -15,8 +15,8 @@ public class DomainLoginService implements LoginService {
     private final CustomerRepository customerRepository;
 
     @Override
-    public String login(String id) throws DuplicatedLoginIdException {
-        Customer customer = customerRepository.findById(id)
+    public String login(String id, String pw) throws DuplicatedLoginIdException {
+        Customer customer = customerRepository.findByIdAndPw(id, pw)
                 .orElse(Customer.builder()
                         .loginId(id)
                         .build());

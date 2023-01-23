@@ -5,7 +5,7 @@ import com.sample.sampleedaspring.user.domain.Customer;
 import java.util.Optional;
 
 public interface CustomerRepository {
-    Optional<Customer> findById(String id);
+    Optional<Customer> findByIdAndPw(String id, String pw);
 
     void save(Customer customer);
 }

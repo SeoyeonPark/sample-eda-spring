@@ -9,6 +9,7 @@ import com.sample.sampleedaspring.order.domain.models.DirectOrderItem;
 import com.sample.sampleedaspring.order.domain.models.MenuId;
 import com.sample.sampleedaspring.order.domain.models.Order;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import java.util.List;
 @UseCase
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class CreateDirectOrderService implements CreateDirectOrderUseCase {
 
     private final CreateOrderStatePort createOrderStatePort;
@@ -31,6 +33,7 @@ public class CreateDirectOrderService implements CreateDirectOrderUseCase {
                 command.getHotIced(),
                 command.getNumber(),
                 totalPrice);
+        log.info(directOrderItem.toString());
 
         Order order = new Order(
                 new OrderId(command.getCustomerId()),

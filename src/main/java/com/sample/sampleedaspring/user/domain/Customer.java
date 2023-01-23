@@ -4,10 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,11 +13,15 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@IdClass(CustomerId.class)
 public class Customer {
     @Id
     @Column(name = "login_id")
     private String loginId;
+
+    @Id
+    @Column(name = "login_pw")
+    private String loginPw;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false)

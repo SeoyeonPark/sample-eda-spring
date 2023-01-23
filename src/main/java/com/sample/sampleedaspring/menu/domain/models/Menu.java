@@ -27,12 +27,13 @@ public class Menu {
     private final Integer price;
 
     public Menu (
+            MenuId id,
         @NonNull String title,
         @NonNull MenuType menuType,
         @NonNull SupportedOption supportedOption,
         @NonNull Integer price
         ) {
-        this.id = null;
+        this.id = id;
         this.title = title;
         this.menuType = menuType;
         this.supportedOption = supportedOption;

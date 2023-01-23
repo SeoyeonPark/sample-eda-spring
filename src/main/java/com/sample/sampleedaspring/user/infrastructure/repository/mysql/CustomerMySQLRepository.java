@@ -16,8 +16,8 @@ public class CustomerMySQLRepository implements CustomerRepository {
     private final SpringDataCustomerMySQLRepository repository;
 
     @Override
-    public Optional<Customer> findById(final String id) {
-        return repository.findById(id);
+    public Optional<Customer> findByIdAndPw(final String id, final String pw) {
+        return repository.findByLoginIdAndLoginPw(id, pw);
     }
 
     @Override

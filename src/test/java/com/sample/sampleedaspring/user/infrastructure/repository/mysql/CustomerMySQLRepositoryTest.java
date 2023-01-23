@@ -17,12 +17,13 @@ public class CustomerMySQLRepositoryTest {
     @DisplayName("사용자 저장 테스트")
     void customer_login_success() {
         String loginId = "test_id";
+        String loginPw = "test_pw";
         Customer customer = Customer.builder()
                 .loginId(loginId)
                 .build();
         customerMySQLRepository.save(customer);
 
-        Customer persistCustomer = customerMySQLRepository.findById(loginId)
+        Customer persistCustomer = customerMySQLRepository.findByIdAndPw(loginId, loginPw)
                 .orElse(null);
         Assertions.assertNotNull(persistCustomer);
         Assertions.assertEquals(loginId, persistCustomer.getLoginId());
