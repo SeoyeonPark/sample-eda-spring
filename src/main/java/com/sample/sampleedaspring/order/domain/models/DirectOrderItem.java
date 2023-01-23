@@ -14,6 +14,9 @@ public class DirectOrderItem {
     private MenuId menuId;
 
     @NonNull
+    private String menuName;
+
+    @NonNull
     private HotIced hotIced;
 
     @NonNull
@@ -26,10 +29,12 @@ public class DirectOrderItem {
 
     public DirectOrderItem(
             @NonNull final MenuId menuId,
+            @NonNull final String menuName,
             @NonNull final HotIced hotIced,
             @NonNull @Positive final Integer orderCount,
             @NonNull @PositiveOrZero final BigDecimal price) {
         this.menuId = menuId;
+        this.menuName = menuName;
         this.hotIced = hotIced;
         this.orderCount = orderCount;
         this.price = price;

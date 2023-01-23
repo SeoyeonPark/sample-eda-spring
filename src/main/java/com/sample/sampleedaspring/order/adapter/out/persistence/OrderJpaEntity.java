@@ -12,9 +12,9 @@ import java.util.List;
 @Entity
 @Table(name = "coffee_order")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-class OrderJpaEntity {
+@AllArgsConstructor
+class OrderJpaEntity extends BaseEntity {
     @Id
     @Column(name = "order_id", updatable = false)
     private String orderId;

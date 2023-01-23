@@ -18,6 +18,9 @@ public class CreateDirectOrderCommand extends SelfValidating<CreateDirectOrderCo
     private final String menuId;
 
     @NotNull
+    private final String menuName;
+
+    @NotNull
     private final HotIced hotIced;
 
     @NotNull

@@ -18,6 +18,7 @@ public class OrderMapper {
         for (DirectOrderItem orderItem : orderItemList) {
             orderDetails.add(OrderDetailJpaEntity.builder()
                     .menuId(orderItem.getMenuId().getValue())
+                    .menuName(orderItem.getMenuName())
                     .hotIced(orderItem.getHotIced().name())
                     .orderCount(orderItem.getOrderCount())
                     .price(orderItem.getPrice())
@@ -52,6 +53,7 @@ public class OrderMapper {
     DirectOrderItem mapToDomainEntity(OrderDetailJpaEntity orderDetailJpaEntity) {
         return new DirectOrderItem(
                 new MenuId(orderDetailJpaEntity.getMenuId()),
+                orderDetailJpaEntity.getMenuName(),
                 HotIced.valueOf(orderDetailJpaEntity.getHotIced()),
                 orderDetailJpaEntity.getOrderCount(),
                 orderDetailJpaEntity.getPrice()

@@ -38,7 +38,9 @@ public class OrderPersistenceAdapter implements
 
     @Override
     public List<Order> getOrderListByCustomer(String customerId) {
-        return orderRepository.findByCustomerId(customerId).stream()
+        return orderRepository.findByCustomerId(customerId)
+                .orElse(List.of())
+                .stream()
                 .map(orderJpaEntity -> orderMapper.mapToDomainEntity(orderJpaEntity))
                 .collect(Collectors.toList());
     }

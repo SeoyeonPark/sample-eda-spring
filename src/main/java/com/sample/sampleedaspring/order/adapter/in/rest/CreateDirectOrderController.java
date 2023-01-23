@@ -22,6 +22,7 @@ public class CreateDirectOrderController {
         CreateDirectOrderCommand command = new CreateDirectOrderCommand(
                 request.getLoginId(),
                 request.getMenuId(),
+                request.getMenuName(),
                 request.getHotIced(),
                 request.getOrderCount(),
                 request.getPrice()

@@ -20,6 +20,10 @@ public class CreateDirectOrderRequest extends SelfValidating<CreateDirectOrderRe
     private String menuId;
 
     @NotNull
+    @JsonProperty("menuName")
+    private String menuName;
+
+    @NotNull
     @JsonProperty("hotIced")
     private HotIced hotIced;
 

@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "coffee_order_detail")
@@ -14,7 +17,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-class OrderDetailJpaEntity {
+class OrderDetailJpaEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "order_detail_id")
@@ -27,11 +30,11 @@ class OrderDetailJpaEntity {
     @Column(name = "menu_id")
     private String menuId;
 
+    @Column(name = "menu_name")
+    private String menuName;
+
     @Column(name = "hot_iced")
     private String hotIced;
-
-    @Column(name = "cup_size")
-    private String cup;
 
     @Column(name = "order_ount")
     private Integer orderCount;

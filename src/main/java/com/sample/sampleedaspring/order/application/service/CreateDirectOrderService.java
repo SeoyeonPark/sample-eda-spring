@@ -29,7 +29,9 @@ public class CreateDirectOrderService implements CreateDirectOrderUseCase {
 
         // TODO 재고 체크
 
-        DirectOrderItem directOrderItem = new DirectOrderItem(new MenuId(command.getMenuId()),
+        DirectOrderItem directOrderItem = new DirectOrderItem(
+                new MenuId(command.getMenuId()),
+                command.getMenuName(),
                 command.getHotIced(),
                 command.getNumber(),
                 totalPrice);
