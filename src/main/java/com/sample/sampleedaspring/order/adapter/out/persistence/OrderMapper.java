@@ -1,10 +1,7 @@
 package com.sample.sampleedaspring.order.adapter.out.persistence;
 
 import com.sample.sampleedaspring.menu.domain.models.HotIced;
-import com.sample.sampleedaspring.order.domain.models.OrderId;
-import com.sample.sampleedaspring.order.domain.models.DirectOrderItem;
-import com.sample.sampleedaspring.order.domain.models.MenuId;
-import com.sample.sampleedaspring.order.domain.models.Order;
+import com.sample.sampleedaspring.order.domain.models.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -44,6 +41,7 @@ public class OrderMapper {
         return new Order(
                 new OrderId(orderJpaEntity.getOrderId()),
                 orderJpaEntity.getCustomerId(),
+                OrderStatus.valueOf(orderJpaEntity.getOrderStatus()),
                 orderJpaEntity.getOrderDetails().stream()
                         .map(detail -> mapToDomainEntity(detail))
                         .collect(Collectors.toList())

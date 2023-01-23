@@ -4,10 +4,7 @@ import com.sample.sampleedaspring.common.UseCase;
 import com.sample.sampleedaspring.order.application.port.in.CreateDirectOrderCommand;
 import com.sample.sampleedaspring.order.application.port.in.CreateDirectOrderUseCase;
 import com.sample.sampleedaspring.order.application.port.out.CreateOrderStatePort;
-import com.sample.sampleedaspring.order.domain.models.OrderId;
-import com.sample.sampleedaspring.order.domain.models.DirectOrderItem;
-import com.sample.sampleedaspring.order.domain.models.MenuId;
-import com.sample.sampleedaspring.order.domain.models.Order;
+import com.sample.sampleedaspring.order.domain.models.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,8 +35,9 @@ public class CreateDirectOrderService implements CreateDirectOrderUseCase {
         log.info(directOrderItem.toString());
 
         Order order = new Order(
-                new OrderId(command.getCustomerId()),
+                OrderId.InitializeId(command.getCustomerId()),
                 command.getCustomerId(),
+                OrderStatus.CREATED,
                 List.of(directOrderItem)
         );
 

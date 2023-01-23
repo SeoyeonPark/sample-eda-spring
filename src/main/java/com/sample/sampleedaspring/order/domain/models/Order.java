@@ -28,11 +28,12 @@ public class Order {
     public Order(
             @NonNull OrderId id,
             @NonNull String customerId,
+            @NonNull OrderStatus status,
             @NonNull @Size(min = 1, max = 20) List<DirectOrderItem> directOrderItems) {
         this.id = id;
         this.customerId = customerId;
         this.directOrderItems = new ArrayList<>(directOrderItems);
-        this.status = OrderStatus.CREATED;
+        this.status = status;
         this.totalPrice = directOrderItems.stream()
                 .map(o -> o.getPrice())
                 .reduce(new BigDecimal(0), (a, b) -> a.add(b));

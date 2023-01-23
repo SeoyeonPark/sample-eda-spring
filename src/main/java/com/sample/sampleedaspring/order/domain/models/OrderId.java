@@ -11,7 +11,11 @@ public class OrderId {
     @Getter
     private String value;
 
-    public OrderId(String loginId) {
-        this.value = loginId + "_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss.S"));
+    public OrderId (String orderId) {
+        this.value = orderId;
+    }
+
+    public static OrderId InitializeId(String loginId) {
+        return new OrderId(loginId + "_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS")));
     }
 }
