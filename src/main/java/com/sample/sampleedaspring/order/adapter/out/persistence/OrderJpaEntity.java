@@ -17,7 +17,8 @@ import java.util.List;
 class OrderJpaEntity extends BaseEntity {
     @Id
     @Column(name = "order_id", updatable = false)
-    private String orderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
 
     @Column(name = "customer_id", updatable = false)
     private String customerId;

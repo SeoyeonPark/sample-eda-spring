@@ -36,14 +36,14 @@ public class GetMenuListServiceSample implements GetMenuListQuery {
                         ), 5300),
                 new Menu(
                         new Menu.MenuId(3L),
-                        "캬라멜마끼야또",
+                        "카푸치노",
                         MenuType.COFFEE,
                         new SupportedOption(
                                 Set.of(HotIced.HOT, HotIced.ICED)
                         ), 5500),
                 new Menu(
                         new Menu.MenuId(4L),
-                        "오트밀 라떼",
+                        "마끼야또",
                         MenuType.COFFEE,
                         new SupportedOption(
                                 Set.of(HotIced.HOT, HotIced.ICED)

@@ -16,7 +16,7 @@ import java.util.List;
 public class GetOrderListController {
     private final GetOrderListQuery getOrderListQuery;
 
-    @GetMapping(path = "/barista")
+    @GetMapping(path = "/admin/barista")
     List<Order> getAllCustomerOrderList() {
         return getOrderListQuery.getAllCustomerOrderList();
     }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,12 @@ public class GetOrderListService implements GetOrderListQuery {
 
     @Override
     public List<Order> getAllCustomerOrderList() {
-        return getOrderListPort.getAllOrderList();
+        return getOrderListPort.getAllOrderList().stream()
+                .sorted((o1, o2) ->
+                        o1.getStatus().equals(o2.getStatus())
+                        ? o1.getOrderedAt().compareTo(o2.getOrderedAt())
+                        : o1.getStatus().compareTo(o2.getStatus()))
+                .collect(Collectors.toList());
     }
 
     @Override

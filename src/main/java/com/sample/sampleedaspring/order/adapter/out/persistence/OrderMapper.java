@@ -44,7 +44,8 @@ public class OrderMapper {
                 OrderStatus.valueOf(orderJpaEntity.getOrderStatus()),
                 orderJpaEntity.getOrderDetails().stream()
                         .map(detail -> mapToDomainEntity(detail))
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                orderJpaEntity.getCreatedAt()
         );
     }
 

@@ -5,6 +5,7 @@ import lombok.NonNull;
 
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +25,15 @@ public class Order {
     @Getter
     @NonNull
     private BigDecimal totalPrice;
+    @Getter
+    private LocalDateTime orderedAt;
 
     public Order(
             @NonNull OrderId id,
             @NonNull String customerId,
             @NonNull OrderStatus status,
-            @NonNull @Size(min = 1, max = 20) List<DirectOrderItem> directOrderItems) {
+            @NonNull @Size(min = 1, max = 20) List<DirectOrderItem> directOrderItems,
+            LocalDateTime createdAt) {
         this.id = id;
         this.customerId = customerId;
         this.directOrderItems = new ArrayList<>(directOrderItems);
@@ -37,6 +41,7 @@ public class Order {
         this.totalPrice = directOrderItems.stream()
                 .map(o -> o.getPrice())
                 .reduce(new BigDecimal(0), (a, b) -> a.add(b));
+        this.orderedAt = createdAt;
     }
 
     private void validateOrderState() {
