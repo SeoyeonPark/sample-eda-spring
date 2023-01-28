@@ -35,7 +35,7 @@ public class CreateDirectOrderService implements CreateDirectOrderUseCase {
         log.info(directOrderItem.toString());
 
         Order order = new Order(
-                OrderId.InitializeId(command.getCustomerId()),
+                new OrderId(null),
                 command.getCustomerId(),
                 OrderStatus.CREATED,
                 List.of(directOrderItem),

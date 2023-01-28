@@ -11,5 +11,5 @@ public class PreparedOrderMenuRequest {
 
     @NotNull
     @JsonProperty("orderId")
-    private String orderId;
+    private Long orderId;
 }

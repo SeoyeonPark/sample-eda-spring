@@ -2,6 +2,7 @@ package com.sample.sampleedaspring.order.adapter.out.persistence;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,11 +10,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "coffee_order")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 class OrderJpaEntity extends BaseEntity {
     @Id
     @Column(name = "order_id", updatable = false)

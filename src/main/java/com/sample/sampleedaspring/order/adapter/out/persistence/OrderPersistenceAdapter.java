@@ -47,7 +47,7 @@ public class OrderPersistenceAdapter implements
 
     @Override
     public Order getOrderListByOrderId(OrderId orderId) {
-        String id = orderId.getValue();
+        Long id = orderId.getValue();
         OrderJpaEntity orderJpaEntity = orderRepository.findById(id)
                 .orElse(new OrderJpaEntity());
         return orderMapper.mapToDomainEntity(orderJpaEntity);

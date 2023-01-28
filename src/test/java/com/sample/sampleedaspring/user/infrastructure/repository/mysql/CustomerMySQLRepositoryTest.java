@@ -20,6 +20,7 @@ public class CustomerMySQLRepositoryTest {
         String loginPw = "test_pw";
         Customer customer = Customer.builder()
                 .loginId(loginId)
+                .loginPw(loginPw)
                 .build();
         customerMySQLRepository.save(customer);
 

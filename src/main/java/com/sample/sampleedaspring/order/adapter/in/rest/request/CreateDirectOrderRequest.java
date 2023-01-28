@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sample.sampleedaspring.common.SelfValidating;
 import com.sample.sampleedaspring.menu.domain.models.HotIced;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class CreateDirectOrderRequest extends SelfValidating<CreateDirectOrderRequest> {
 
     @NotNull

@@ -29,7 +29,7 @@ public class OrderMapper {
         List<OrderDetailJpaEntity> orderDetails = mapToDetailJpaEntity(order.getDirectOrderItems());
 
         return new OrderJpaEntity(
-                order.getId().getValue(),
+                null,
                 order.getCustomerId(),
                 order.getStatus().name(),
                 order.getTotalPrice(),
