@@ -1,4 +1,7 @@
 appName := "eda-sample-coffee-app"
+ecsTaskName := "eda-ws-task"
+ecsClusterName := "eda-ws-cluster-coffee"
+ecsServiceName := "eda-ws-svc-coffee"
 
 .PHONY: mysql
 mysql:
@@ -70,4 +73,20 @@ docker-stop:
 
 .PHONY: ecs-update
 ecs-update:
-	@aws ecs update-service --cluster ecs-cluster-coffee --service ecs-svc-eda-coffee-app
+# 파일로 task definition 쓴 뒤 register-task-definition
+# 최신 revision으로 update-service
+# 	@$(shell aws ecs describe-task-definition --task-definition svc-coffee-app \
+#             --query 'taskDefinition.{containerDefinitions: containerDefinitions[*],family:family}' > taskDefinition.json)
+
+	@$(shell aws ecs describe-task-definition \
+	    --task-definition $(ecsTaskName) | jq '.taskDefinition | del(.taskDefinitionArn) | del(.revision) | del(.status) | del(.requiresAttributes) | del(.compatibilities) | del (.registeredAt) | del (.registeredBy)' > taskDefinition.json)
+	@$(eval export NEW_TASK_INFO = $(shell aws ecs register-task-definition \
+	        --cli-input-json file://./taskDefinition.json))
+	@$(eval export NEW_REVISION = $(shell aws ecs describe-task-definition \
+     	    --task-definition eda-ws-task | jq '.taskDefinition.revision'))
+	@echo "new revision for ecs task: "$(ecsTaskName)":"$(NEW_REVISION)
+	@$(shell aws ecs update-service \
+	    --cluster $(ecsClusterName) \
+	    --service $(ecsServiceName) \
+	    --task-definition $(ecsTaskName):$(NEW_REVISION))
+	@rm ./taskDefinition.json

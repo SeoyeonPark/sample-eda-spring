@@ -48,6 +48,7 @@ TODO: ecs task create and update ecs cluster service
 aws ecs update-service \
  --cluster ecs-cluster-coffee \
  --service ecs-svc-eda-coffee-app
+ --task-definition 
 ```
 
 
